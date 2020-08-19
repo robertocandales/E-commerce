@@ -4,15 +4,18 @@ import Profile from '../Components/Profile/Profile';
 
 export const routes = [
   {
-    path: '/Cart',
+    path: '/ShoppingCart',
     component: ShoppingCart,
+    name: 'ShoppingCart',
   },
   {
     path: '/ShoppingsProducts',
     component: ShoppingsProducts,
+    name: 'ShoppingsProducts',
   },
   {
     path: '/Profile',
     component: Profile,
+    name: 'Profile',
   },
 ];

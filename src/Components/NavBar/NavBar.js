@@ -5,7 +5,7 @@ import { ShoppingCartOutlined, AppstoreOutlined, UserOutlined } from '@ant-desig
 //const { SubMenu } = Menu;
 
 const NavBar = () => {
-  const [current, setcurrent] = useState({ current: 'Cart' });
+  const [current, setcurrent] = useState({ current: 'ShoppingsProducts' });
   //const { current } = current;
   let history = useHistory();
   const redirect = ({ route }) => {
@@ -17,6 +17,7 @@ const NavBar = () => {
     setcurrent({ current: e.key });
     redirect({ route: `/${e.key}` });
   };
+  console.log(current);
   return (
     <Menu onClick={handleClick} selectedKeys={[current]} mode='horizontal' theme='dark'>
       <Menu.Item key='ShoppingsProducts' icon={<AppstoreOutlined />}>
