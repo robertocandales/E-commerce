@@ -6,6 +6,8 @@ import ShoppingsProducts from './Components/ShoppingProducts/ShoppingsProducts';
 import Profile from './Components/Profile/Profile';
 import NavBar from './Components/NavBar/NavBar';
 import ShoppingCart from './Components/ShoppingCart/ShoppingCart';
+import MainLogin from './Components/login/MainLogin';
+
 
 function App() {
   return (
@@ -31,6 +33,12 @@ function App() {
               name='Profile'
               path='/Profile'
               render={(props) => <Profile {...props} />}
+            />
+            <Route
+              exact
+              name='Login'
+              path='/Login'
+              render={(props) => <MainLogin {...props} />}
             />
             <Redirect from='/' to='/login' />
           </Switch>

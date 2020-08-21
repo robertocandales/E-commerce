@@ -29,6 +29,9 @@ const NavBar = () => {
       <Menu.Item key='Profile' icon={<UserOutlined />}>
         Perfil
       </Menu.Item>
+      <Menu.Item key='Login' icon={<UserOutlined />}>
+        Login
+      </Menu.Item>
     </Menu>
   );
 };
