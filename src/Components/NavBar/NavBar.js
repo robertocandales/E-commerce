@@ -17,7 +17,7 @@ const NavBar = () => {
     setcurrent({ current: e.key });
     redirect({ route: `/${e.key}` });
   };
-  console.log(current);
+
   return (
     <Menu onClick={handleClick} selectedKeys={[current]} mode='horizontal' theme='dark'>
       <Menu.Item key='ShoppingsProducts' icon={<AppstoreOutlined />}>
