@@ -1,6 +1,7 @@
 import ShoppingCart from '../Components/ShoppingCart/ShoppingCart';
 import ShoppingsProducts from '../Components/ShoppingProducts/ShoppingsProducts';
 import Profile from '../Components/Profile/Profile';
+import MainLogin from '../Components/login/MainLogin';
 
 export const routes = [
   {
@@ -17,5 +18,10 @@ export const routes = [
     path: '/Profile',
     component: Profile,
     name: 'Profile',
+  },
+  {
+    path: '/Login',
+    component: MainLogin,
+    name: 'Login',
   },
 ];
