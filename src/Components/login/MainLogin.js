@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Login from './loginComponents/Login/Login';
 import Signup from './loginComponents/signup/Signup';
 import Recover from './loginComponents/Recover/Recover';
-import { Button } from 'antd';
 
 const MainLogin = () => {
-  const [showComponent, setShowComponent] = React.useState({
+  const [showComponent, setShowComponent] = useState({
     Login: true,
     Recover: false,
     Signup: false,
@@ -27,7 +26,7 @@ const MainLogin = () => {
       ) : showComponent.Recover ? (
         <Recover setShowComponent={setShowComponent} />
       ) : (
-        <Signup />
+        <Signup setShowComponent={setShowComponent} />
       )}
     </div>
   );

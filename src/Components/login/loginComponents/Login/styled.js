@@ -2,18 +2,6 @@ import styled from 'styled-components';
 import { respondTo } from '../../../../Utils/mixins';
 import { Input, Card } from 'antd';
 
-export const CustomCard = styled(Card)`
-  height: 100%;
-  width: 100%;
-  border-radius: 5px;
-  -webkit-box-shadow: 0px 0px 14px -2px rgba(210, 211, 214, 1);
-  -moz-box-shadow: 0px 0px 14px -2px rgba(210, 211, 214, 1);
-  box-shadow: 0px 0px 14px -2px rgba(210, 211, 214, 1);
-  //  background-color: #f5f5ea;
-  ${respondTo.mobile`
-   width: 300px;
-  `}
-`;
 export const WrapperLogin = styled.div`
   display: flex;
   ${respondTo.mobile`
