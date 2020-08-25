@@ -20,7 +20,7 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 const tailLayout = {
-  wrapperCol: { offset: 6, span: 24 },
+  wrapperCol: { offset: 8, span: 24 },
 };
 
 const Login = ({ setShowComponent }) => {
@@ -74,15 +74,17 @@ const Login = ({ setShowComponent }) => {
     <MainContainer>
       <Registrate>
         <Text type='secondary' style={{ color: 'red', marginRight: '-10px', marginTop: '-20px' }}>
-          No tienes cuenta?
+          ¿No tienes cuenta?
         </Text>{' '}
         <Button
           type='link'
-          style={{ marginTop: '-25px', color: 'red', marginRight: '-10px' }}
+          style={{ marginTop: '-25px', color: 'orange', marginRight: '-30px' }}
           onClick={() => setShowComponent({ Login: false, Recover: false, Signup: true })}>
           Registrate
         </Button>
       </Registrate>
+      <br />
+
       <WrapperTitle>
         <Title type='secondary'>Iniciar Sesion</Title>
       </WrapperTitle>
@@ -118,20 +120,17 @@ const Login = ({ setShowComponent }) => {
               htmlType='submit'
               ghost
               style={{ color: '#111d2c' }}
-              icon={<PoweroffOutlined />}
               loading={loading}>
               Iniciar Sesión
             </Button>
           </Form.Item>
         </Form>
-      </WrapperLogin>
 
-      <WrapperLogin>
         <Button
-          style={{ color: '#111d2c' }}
+          style={{ color: 'orange' }}
           type='link'
           onClick={() => setShowComponent({ Login: false, Recover: true, Signup: false })}>
-          Olvidaste Contrasena?
+          ¿Olvidaste Contrasena?
         </Button>
       </WrapperLogin>
     </MainContainer>

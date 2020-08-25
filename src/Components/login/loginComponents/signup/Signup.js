@@ -71,21 +71,19 @@ const Signup = ({ setShowComponent }) => {
       <CustomCard>
         <Registrate>
           <Text type='secondary' style={{ color: 'red', marginRight: '-10px', marginTop: '-20px' }}>
-            Ya tienes una cuenta?
+            ¿Ya tienes una cuenta?
           </Text>{' '}
           <Button
             type='link'
-            style={{ marginTop: '-25px', color: 'red', marginRight: '-10px' }}
+            style={{ marginTop: '-25px', color: 'orange', marginRight: '-30px' }}
             onClick={() => setShowComponent({ Login: true, Recover: false, Signup: false })}>
             Iniciar Sesion
           </Button>
         </Registrate>{' '}
         <br />
-        <br />
         <WrapperTitle>
           <Title type='secondary'>Registrarse</Title>
         </WrapperTitle>
-        <br />
         <br />
         <WrapperLogin>
           <Form
@@ -127,7 +125,6 @@ const Signup = ({ setShowComponent }) => {
                 htmlType='submit'
                 ghost
                 style={{ color: '#111d2c' }}
-                icon={<PoweroffOutlined />}
                 loading={loading}>
                 Registrarse
               </Button>

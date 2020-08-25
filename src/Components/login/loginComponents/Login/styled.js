@@ -4,6 +4,7 @@ import { Input, Card } from 'antd';
 
 export const WrapperLogin = styled.div`
   display: flex;
+  flex-direction: column;
   ${respondTo.mobile`
   display:flex;
   `}
