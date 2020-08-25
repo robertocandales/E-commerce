@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Typography } from 'antd';
 import { PoweroffOutlined } from '@ant-design/icons';
 import Notification from '../../../global/Notification';
-import { RegisterUser } from '../../../../Api/ProductsApi';
+import { RegisterUser } from '../../../../Api/UserApi';
 
 import {
   WrapperLogin,

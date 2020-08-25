@@ -1,37 +1,45 @@
+import { URLbase } from './URLbase';
 import axios from 'axios';
 
-const URL = 'https://us-central1-e-commerce-92b6e.cloudfunctions.net/app/api';
-const getAllProduct = '/getAllProduct';
-const getProduct = '/getProduct';
-const deleteProduct = '/deleteProduct';
-const updateProduct = '/updateProduct';
+const getAllProduct = '/api/products';
+const getProduct = '/api/products/';
+const deleteProduct = '/api/products/';
+const updateProduct = '/updateProduct/';
+const createProduct = '/api/products';
 
 export const allProducts = async () => {
   const options = {
     body: {},
   };
-  return await axios.get(`${URL}${getAllProduct}`, options.body);
+  return await axios.get(`${URLbase}${getAllProduct}`, options.body);
 };
-const URL1 = 'https://apirestbackendecommerce.herokuapp.com';
-const PostLogin = '/api/user/auth';
-const Register = '/api/user';
-
-export const authLogin = async (data) => {
-  console.log(data, data);
+export const productById = async (id) => {
+  const options = {
+    body: {},
+  };
+  return await axios.get(`${URLbase}${getProduct}${id}`, options.body);
+};
+export const newProduct = async (data) => {
   const options = {
     body: {
       ...data,
     },
   };
-  return await axios.post(`${URL1}${PostLogin}`, options.body);
+  return await axios.post(`${URLbase}${createProduct}`, options.body);
 };
-export const RegisterUser = async (data) => {
+export const deleteAproduct = async (id, data) => {
   const options = {
-    headers: { 'Access-Control-Allow-Origin': '*' },
-
     body: {
       ...data,
     },
   };
-  return await axios.post(`${URL1}${Register}`, options.body, options.headers);
+  return await axios.delete(`${URLbase}${deleteProduct}${id}`, options.body);
+};
+export const updateAproduct = async (id, data) => {
+  const options = {
+    body: {
+      ...data,
+    },
+  };
+  return await axios.put(`${URLbase}${updateProduct}${id}`, options.body);
 };
