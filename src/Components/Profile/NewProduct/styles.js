@@ -1,6 +1,19 @@
 import styled from 'styled-components';
 import { respondTo } from '../../../Utils/mixins';
-import { Input } from 'antd';
+import { Input, Card } from 'antd';
+
+export const CustomCard = styled(Card)`
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 14px -2px rgba(210, 211, 214, 1);
+  -moz-box-shadow: 0px 0px 14px -2px rgba(210, 211, 214, 1);
+  box-shadow: 0px 0px 14px -2px rgba(210, 211, 214, 1);
+
+  ${respondTo.mobile`
+   width: 300px;
+  `}
+`;
 
 export const WrapperTitle = styled.div`
   display: flex;
@@ -37,5 +50,16 @@ export const ProductFields = styled.div`
   height: 100%;
   ${respondTo.mobile`
   flex-direction:column;
+  `}
+`;
+export const ButtonWrapper = styled.div`
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  ${respondTo.mobile`
+  
   `}
 `;

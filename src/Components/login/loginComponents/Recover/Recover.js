@@ -30,7 +30,7 @@ const Recover = ({ setShowComponent }) => {
   };
   return (
     <MainContainer>
-      <CustomCard>
+      <CustomCard hoverable>
         <WrapperTitle>
           <Title type='secondary'> ¿Olvidaste tu contraseña?</Title>
         </WrapperTitle>

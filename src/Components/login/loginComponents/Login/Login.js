@@ -35,7 +35,7 @@ const Login = ({ setShowComponent }) => {
       if (!res.data.error) {
         Notification({
           type: 'success',
-          message: 'Bienvenidos',
+          message: `Bienvenidos ${res.data.user.name}`,
         });
         setdata(res.data);
         //redirect({ route: '/envios-en-curso' });
@@ -70,7 +70,7 @@ const Login = ({ setShowComponent }) => {
 
   return (
     <MainContainer>
-      <CustomCard>
+      <CustomCard hoverable>
         <Registrate>
           <Text type='secondary' style={{ marginRight: '-0px', marginTop: '-20px' }}>
             ¿No tienes cuenta?

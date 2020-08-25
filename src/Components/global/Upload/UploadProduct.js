@@ -2,16 +2,7 @@ import React, { useState } from 'react';
 import { Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
 
-const UploadProduct = () => {
-  const [fileList, setFileList] = useState([
-    {
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-  ]);
-
+const UploadProduct = ({ fileList, setFileList }) => {
   const onChange = ({ fileList: newFileList }) => {
     console.log(newFileList);
     setFileList(newFileList);
