@@ -10,6 +10,7 @@ import {
   Registrate,
   CustomInput,
   CustomInputPassword,
+  CustomCard,
 } from './styled';
 import { LoginAction } from '../../../../Redux/Actions/LoginAction';
 import Notification from '../../../global/Notification';
@@ -18,9 +19,6 @@ const { Title, Text } = Typography;
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 24 },
 };
 
 const Login = ({ setShowComponent }) => {
@@ -72,67 +70,77 @@ const Login = ({ setShowComponent }) => {
 
   return (
     <MainContainer>
-      <Registrate>
-        <Text type='secondary' style={{ color: 'red', marginRight: '-10px', marginTop: '-20px' }}>
-          ¿No tienes cuenta?
-        </Text>{' '}
-        <Button
-          type='link'
-          style={{ marginTop: '-25px', color: 'orange', marginRight: '-30px' }}
-          onClick={() => setShowComponent({ Login: false, Recover: false, Signup: true })}>
-          Registrate
-        </Button>
-      </Registrate>
-      <br />
+      <CustomCard>
+        <Registrate>
+          <Text type='secondary' style={{ marginRight: '-0px', marginTop: '-20px' }}>
+            ¿No tienes cuenta?
+          </Text>{' '}
+          <Button
+            type='link'
+            style={{ marginTop: '-25px', color: 'orange', marginRight: '-0px' }}
+            onClick={() => setShowComponent({ Login: false, Recover: false, Signup: true })}>
+            Registrate
+          </Button>
+        </Registrate>
+        <br />
 
-      <WrapperTitle>
-        <Title type='secondary'>Iniciar Sesion</Title>
-      </WrapperTitle>
+        <WrapperTitle>
+          <Title type='secondary'>Iniciar Sesion</Title>
+        </WrapperTitle>
 
-      <WrapperLogin>
-        <Form
-          {...layout}
-          name='basic'
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}>
-          <Form.Item
-            label=''
-            name='email'
-            rules={[{ required: true, message: 'Please input your username!' }]}>
-            <CustomInput placeholder='Usuario' />
-          </Form.Item>
+        <WrapperLogin>
+          <Form
+            {...layout}
+            name='basic'
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}>
+            <Form.Item
+              label=''
+              name='email'
+              rules={[{ required: true, message: 'Please input your username!' }]}>
+              <CustomInput placeholder='Usuario' />
+            </Form.Item>
 
-          <Form.Item
-            label=''
-            name='password'
-            rules={[{ required: true, message: 'Please input your password!' }]}>
-            <CustomInputPassword placeholder='Clave' />
-          </Form.Item>
+            <Form.Item
+              label=''
+              name='password'
+              rules={[{ required: true, message: 'Please input your password!' }]}>
+              <CustomInputPassword placeholder='Clave' />
+            </Form.Item>
 
-          {/*<Form.Item {...tailLayout} name='remember' valuePropName='checked'>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>*/}
+            <Form.Item
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignContent: 'center',
+                width: '100%',
+              }}>
+              <Button
+                type='primary'
+                htmlType='submit'
+                ghost
+                style={{
+                  color: '#111d2c',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                  width: '100%',
+                }}
+                loading={loading}>
+                Iniciar Sesión
+              </Button>
+            </Form.Item>
+          </Form>
 
-          <Form.Item {...tailLayout}>
-            <Button
-              type='primary'
-              htmlType='submit'
-              ghost
-              style={{ color: '#111d2c' }}
-              loading={loading}>
-              Iniciar Sesión
-            </Button>
-          </Form.Item>
-        </Form>
-
-        <Button
-          style={{ color: 'orange' }}
-          type='link'
-          onClick={() => setShowComponent({ Login: false, Recover: true, Signup: false })}>
-          ¿Olvidaste Contrasena?
-        </Button>
-      </WrapperLogin>
+          <Button
+            style={{ color: 'orange' }}
+            type='link'
+            onClick={() => setShowComponent({ Login: false, Recover: true, Signup: false })}>
+            ¿Olvidaste Contrasena?
+          </Button>
+        </WrapperLogin>
+      </CustomCard>
     </MainContainer>
   );
 };

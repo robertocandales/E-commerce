@@ -59,13 +59,14 @@ export const Registrate = styled.div`
 export const CustomInput = styled(Input)`
   width: 300px;
   ${respondTo.mobile`
-  
+    width: 250px;
+
   `}
 `;
 
 export const CustomInputPassword = styled(Input.Password)`
   width: 300px;
   ${respondTo.mobile`
-  
+  width: 250px;
   `}
 `;

@@ -21,7 +21,7 @@ export const CustomCard = styled(Card)`
 export const WrapperLogin = styled.div`
   display: flex;
   flex-direction: column;
-
+  padding: 10px;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -69,6 +69,6 @@ export const Registrate = styled.div`
 export const CustomInput = styled(Input)`
   width: 300px;
   ${respondTo.mobile`
-  
+  width: 250px;
   `}
 `;

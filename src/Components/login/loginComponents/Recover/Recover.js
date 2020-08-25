@@ -65,7 +65,7 @@ const Recover = ({ setShowComponent }) => {
         <WrapperButton>
           <Button
             type='link'
-            style={{ marginTop: '-25px', color: 'red', marginRight: '-10px' }}
+            style={{ marginTop: '-25px', color: 'red' }}
             onClick={() => setShowComponent({ Login: true, Recover: false, Signup: false })}>
             Volver a inicio de sesion
           </Button>

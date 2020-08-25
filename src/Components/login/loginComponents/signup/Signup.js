@@ -20,9 +20,6 @@ const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
 };
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
 
 const Signup = ({ setShowComponent }) => {
   const [loading, setloading] = useState(false);
@@ -119,12 +116,24 @@ const Signup = ({ setShowComponent }) => {
               <CustomInputPassword placeholder='Contraseña' />
             </Form.Item>
 
-            <Form.Item {...tailLayout}>
+            <Form.Item
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignContent: 'center',
+                width: '100%',
+              }}>
               <Button
                 type='primary'
                 htmlType='submit'
                 ghost
-                style={{ color: '#111d2c' }}
+                style={{
+                  color: '#111d2c',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                  width: '100%',
+                }}
                 loading={loading}>
                 Registrarse
               </Button>
