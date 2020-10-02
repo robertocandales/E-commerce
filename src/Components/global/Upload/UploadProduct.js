@@ -1,38 +1,88 @@
 import React, { useState } from 'react';
-import { Upload } from 'antd';
-import ImgCrop from 'antd-img-crop';
+import axios from 'axios';
+import { Upload, Progress } from 'antd';
+import Notification from '../../global/Notification';
+import './styles.css';
+import { URLbase } from '../../../Api/URLbase';
+import { useSelector } from 'react-redux';
 
-const UploadProduct = ({ fileList, setFileList }) => {
-  const onChange = ({ fileList: newFileList }) => {
-    console.log(newFileList);
-    setFileList(newFileList);
-  };
+const UploadProduct = ({ fileList, setFileList, setHhumbUrl }) => {
+  const { token } = useSelector((store) => store.login.login);
+  const [defaultFileList, setDefaultFileList] = useState([]);
+  const [progress, setProgress] = useState(0);
 
-  const onPreview = async (file) => {
-    let src = file.url;
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result);
-      });
+  const uploadImage = async (options) => {
+    const { onSuccess, onError, file, onProgress } = options;
+    const formData = new FormData();
+    console.log(file, 'file');
+    const config = {
+      headers: { 'content-type': 'multipart/form-data', 'X-Auth-Token': token },
+      onUploadProgress: (event) => {
+        const percent = Math.floor((event.loaded / event.total) * 100);
+        setProgress(percent);
+        if (percent === 100) {
+          setTimeout(() => setProgress(0), 1000);
+        }
+        onProgress({ percent: (event.loaded / event.total) * 100 });
+      },
+    };
+    formData.append('file', file);
+
+    try {
+      const res = await axios.post(`${URLbase}/api/products/upload`, formData, config);
+      if (!res.data.error) {
+        Notification({
+          message: 'Imagen Cargada',
+          type: 'success',
+        });
+        setFileList(res.data.filename);
+        onSuccess('Ok');
+      } else {
+        if (res.data.error === 'No token, authorization denied') {
+          Notification({
+            message: 'Debe iniciar sesion para cargar la imagen',
+            type: 'error',
+          });
+        }
+        if (res.data.error === 'Token is no valid') {
+          Notification({
+            message: 'Problemas de inicio de sesion, debe inicar sesion nuevamente',
+            type: 'error',
+          });
+        }
+      }
+
+      console.log('server res: ', res);
+    } catch (err) {
+      console.log('Eroor: ', err);
+      const error = new Error('Some error');
+      onError({ err });
     }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow.document.write(image.outerHTML);
   };
+
+  const handleOnChange = ({ file, fileList, event }) => {
+    setDefaultFileList(fileList);
+    setHhumbUrl(fileList[0]);
+    console.log(fileList, 'fileList');
+  };
+
   return (
-    <ImgCrop rotate>
-      <Upload
-        action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
-        listType='picture-card'
-        fileList={fileList}
-        onChange={onChange}
-        onPreview={onPreview}>
-        {fileList.length < 5 && '+ Upload'}
-      </Upload>
-    </ImgCrop>
+    <>
+      <div className='container'>
+        <Upload
+          type='file'
+          name='file'
+          accept='image/*'
+          customRequest={uploadImage}
+          onChange={handleOnChange}
+          listType='picture-card'
+          defaultFileList={defaultFileList}
+          className='image-upload-grid'>
+          {defaultFileList.length >= 1 ? null : <div>Upload Button</div>}
+        </Upload>
+        {progress > 0 ? <Progress percent={progress} /> : null}
+      </div>
+    </>
   );
 };
 

@@ -10,7 +10,7 @@ import { rootReducer } from '../Reducers/rootReducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['product', 'LoginReducer'],
+  whitelist: ['product', 'login'],
   stateReconciler: hardSet,
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -19,13 +19,14 @@ export const productById = async (id) => {
   };
   return await axios.get(`${URLbase}${getProduct}${id}`, options.body);
 };
-export const newProduct = async (data) => {
+export const newProduct = async (data, token) => {
   const options = {
     body: {
       ...data,
     },
+    headers: { 'Content-Type': 'application/json', 'X-Auth-Token': token },
   };
-  return await axios.post(`${URLbase}${createProduct}`, options.body);
+  return await axios.post(`${URLbase}${createProduct}`, options.body, { headers: options.headers });
 };
 export const deleteAproduct = async (id, data) => {
   const options = {

@@ -38,7 +38,7 @@ export const ProductForm = styled.div`
   align-items: center;
   width: 100%;
   ${respondTo.mobile`
-  flex-direction:column:
+  flex-direction:column;
   `}
 `;
 export const ProductFields = styled.div`

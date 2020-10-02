@@ -10,28 +10,67 @@ import {
 } from './styles';
 import { Form, Button, Typography } from 'antd';
 import Notification from '../../global/Notification';
+import { newProduct } from '../../../Api/ProductsApi';
+import { useSelector } from 'react-redux';
 const { Title } = Typography;
 
 const NewProduct = () => {
-  const [fileList, setFileList] = useState([
-    {
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-  ]);
+  const { token } = useSelector((store) => store.login.login);
+  const [fileList, setFileList] = useState([]);
+  const [thumbUrl, setHhumbUrl] = useState('');
+
   const [loading, setloading] = useState(false);
-  const onFinish = (values) => {
-    console.log('Success:', values);
+  const formatData = (values, fileList) => {
+    return {
+      name: values.name,
+      description: values.description,
+      price: values.price,
+      image: fileList.thumbUrl,
+    };
+  };
+  const onFinish = async (values) => {
+    setloading(true);
+    const data = formatData(values, thumbUrl);
+    console.log(data);
+    const res = await newProduct(data, token);
+    console.log(res);
+    if (!res.data.error) {
+      Notification({
+        message: 'Producto guardado de forma existosa',
+        type: 'success',
+      });
+      setloading(false);
+    } else {
+      if (res.data.error === 'No token, authorization denied') {
+        Notification({
+          message: 'Debe iniciar sesion para poder cargar productos',
+          type: 'error',
+        });
+        setloading(false);
+      }
+      if (res.data.error === 'Token is no valid') {
+        Notification({
+          message: 'Problemas de inicio de sesion, debe inicar sesion nuevamente',
+          type: 'error',
+        });
+        setloading(false);
+      }
+    }
+    setloading(false);
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
     Notification({
       message: 'Verifique los campos',
       type: 'error',
     });
+  };
+  const normFile = (e) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+
+    return e && e.fileList;
   };
   return (
     <div className='site-card-border-less-wrapper'>
@@ -67,9 +106,22 @@ const NewProduct = () => {
                 rules={[{ required: true, message: 'Campo requerido' }]}>
                 <CustomInput width={'150px'} placeholder='Precio del Producto' />
               </Form.Item>{' '}
-              <div style={{ display: 'flex' }}>
-                <UploadProduct fileList={fileList} setFileList={setFileList} />
-              </div>
+              <Form.Item
+                name='image'
+                label='Imagen'
+                valuePropName='fileList'
+                getValueFromEvent={normFile}
+                extra=''>
+                <div style={{ display: 'flex' }}>
+                  <UploadProduct
+                    fileList={fileList}
+                    setFileList={setFileList}
+                    action='/upload.do'
+                    listType='picture'
+                    setHhumbUrl={setHhumbUrl}
+                  />
+                </div>{' '}
+              </Form.Item>
             </ProductForm>
           </ProductFields>
           <ButtonWrapper>
