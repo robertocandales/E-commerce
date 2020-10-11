@@ -30,7 +30,7 @@ const Login = ({ setShowComponent }) => {
 
   const onFinish = async (values) => {
     setloading(true);
-    console.log('Success:', values);
+
     try {
       const res = await authLogin(values);
       console.log(res, 'res');
@@ -82,7 +82,7 @@ const Login = ({ setShowComponent }) => {
           <Button
             type='link'
             style={{ marginTop: '-25px', color: 'orange', marginRight: '-0px' }}
-            onClick={() => setShowComponent({ Login: false, Recover: false, Signup: true })}>
+            onClick={() => redirect({ route: '/Register' })}>
             Registrate
           </Button>
         </Registrate>

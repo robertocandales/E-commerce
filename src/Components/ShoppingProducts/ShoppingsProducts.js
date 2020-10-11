@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from './ProductCard/ProductCard';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Wrapper } from './styled';
 import { Typography, Skeleton } from 'antd';
 import { allProducts } from '../../Api/ProductsApi';
@@ -9,9 +9,11 @@ import Notification from '../global/Notification';
 const { Title } = Typography;
 
 const ShoppingsProducts = () => {
+  const dispatch = useDispatch();
+  const { login } = useSelector((store) => store.login);
   const [dataProducts, setdataProducts] = useState([]);
   const [loading, setloading] = useState(false);
-  const dispatch = useDispatch();
+
   useEffect(() => {
     const product = async () => {
       setloading(true);
@@ -45,6 +47,7 @@ const ShoppingsProducts = () => {
                 price={product.price}
                 description={product.description}
                 id={product._id}
+                login={login}
               />
             </div>
           ))}

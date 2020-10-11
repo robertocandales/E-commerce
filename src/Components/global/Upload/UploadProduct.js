@@ -7,7 +7,7 @@ import { URLbase } from '../../../Api/URLbase';
 import { useSelector } from 'react-redux';
 
 const UploadProduct = ({ fileList, setFileList, setHhumbUrl, thumbUrl, edit = false }) => {
-  const { token } = useSelector((store) => store.login.login);
+  const { login } = useSelector((store) => store.login);
   const [defaultFileList, setDefaultFileList] = useState(
     edit
       ? [
@@ -29,7 +29,7 @@ const UploadProduct = ({ fileList, setFileList, setHhumbUrl, thumbUrl, edit = fa
     const formData = new FormData();
     console.log(file, 'file');
     const config = {
-      headers: { 'content-type': 'multipart/form-data', 'X-Auth-Token': token },
+      headers: { 'content-type': 'multipart/form-data', 'X-Auth-Token': login.token },
       onUploadProgress: (event) => {
         const percent = Math.floor((event.loaded / event.total) * 100);
         setProgress(percent);

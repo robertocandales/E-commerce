@@ -11,19 +11,18 @@ export const CustomCard = styled(Card)`
   box-shadow: 0px 0px 14px -2px rgba(210, 211, 214, 1);
   //  background-color: #f5f5ea;
 
+  max-width: 450px;
   ${respondTo.mobile`
    width: 300px;
   `}
 `;
 export const WrapperLogin = styled.div`
-  width: 100%;
-
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: space-between;
+  justify-content: center;
+  align-items: center;
   ${respondTo.mobile`
-  display:flex;
+  
   `}
 `;
 

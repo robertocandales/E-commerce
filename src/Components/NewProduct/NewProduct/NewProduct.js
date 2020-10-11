@@ -16,7 +16,7 @@ import { useHistory } from 'react-router';
 const { Title } = Typography;
 
 const NewProduct = () => {
-  const { token } = useSelector((store) => store.login.login);
+  const { login } = useSelector((store) => store.login);
   const [fileList, setFileList] = useState([]);
   const [thumbUrl, setHhumbUrl] = useState('');
   let history = useHistory();
@@ -35,7 +35,7 @@ const NewProduct = () => {
 
     const data = formatData(values, thumbUrl);
     if (data.image) {
-      const res = await newProduct(data, token);
+      const res = await newProduct(data, login.token);
       console.log(res);
       if (!res.data.error) {
         Notification({

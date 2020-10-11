@@ -13,6 +13,7 @@ import {
   CustomInput,
   CustomInputPassword,
 } from './styled';
+import { useHistory } from 'react-router';
 
 const { Title, Text } = Typography;
 
@@ -22,6 +23,8 @@ const layout = {
 };
 
 const Signup = ({ setShowComponent }) => {
+  let history = useHistory();
+
   const [loading, setloading] = useState(false);
 
   const onFinish = async (values) => {
@@ -63,85 +66,97 @@ const Signup = ({ setShowComponent }) => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+  const redirect = ({ route }) => {
+    history.push(route);
+  };
   return (
-    <MainContainer>
-      <CustomCard>
-        <Registrate>
-          <Text type='secondary' style={{ color: 'red', marginRight: '-10px', marginTop: '-20px' }}>
-            ¿Ya tienes una cuenta?
-          </Text>{' '}
-          <Button
-            type='link'
-            style={{ marginTop: '-25px', color: 'orange', marginRight: '-30px' }}
-            onClick={() => setShowComponent({ Login: true, Recover: false, Signup: false })}>
-            Iniciar Sesion
-          </Button>
-        </Registrate>{' '}
-        <br />
-        <WrapperTitle>
-          <Title type='secondary'>Registrarse</Title>
-        </WrapperTitle>
-        <br />
-        <WrapperLogin>
-          <Form
-            {...layout}
-            name='basic'
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}>
-            <Form.Item
-              label=''
-              name='name'
-              rules={[{ required: true, message: 'Ingrese nombre de usuario' }]}>
-              <CustomInput placeholder='Nombre' />
-            </Form.Item>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '90vh',
+      }}>
+      <MainContainer>
+        <CustomCard hoverable>
+          <Registrate>
+            <Text
+              type='secondary'
+              style={{ color: 'red', marginRight: '-10px', marginTop: '-20px' }}>
+              ¿Ya tienes una cuenta?
+            </Text>{' '}
+            <Button
+              type='link'
+              style={{ marginTop: '-25px', color: 'orange', marginRight: '-30px' }}
+              onClick={() => redirect({ route: '/Login' })}>
+              Iniciar Sesion
+            </Button>
+          </Registrate>{' '}
+          <br />
+          <WrapperTitle>
+            <Title type='secondary'>Registrarse</Title>
+          </WrapperTitle>
+          <br />
+          <WrapperLogin>
+            <Form
+              {...layout}
+              name='basic'
+              initialValues={{ remember: true }}
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}>
+              <Form.Item
+                label=''
+                name='name'
+                rules={[{ required: true, message: 'Ingrese nombre de usuario' }]}>
+                <CustomInput placeholder='Nombre' />
+              </Form.Item>
 
-            <Form.Item
-              label=''
-              name='email'
-              rules={[
-                {
-                  type: 'email',
-                  message: 'No tiene formato de email',
-                },
-                { required: true, message: 'Ingrese email' },
-              ]}>
-              <CustomInput placeholder='Email' />
-            </Form.Item>
+              <Form.Item
+                label=''
+                name='email'
+                rules={[
+                  {
+                    type: 'email',
+                    message: 'No tiene formato de email',
+                  },
+                  { required: true, message: 'Ingrese email' },
+                ]}>
+                <CustomInput placeholder='Email' />
+              </Form.Item>
 
-            <Form.Item
-              label=''
-              name='password'
-              rules={[{ required: true, message: 'Ingrese contraseña' }]}>
-              <CustomInputPassword placeholder='Contraseña' />
-            </Form.Item>
+              <Form.Item
+                label=''
+                name='password'
+                rules={[{ required: true, message: 'Ingrese contraseña' }]}>
+                <CustomInputPassword placeholder='Contraseña' />
+              </Form.Item>
 
-            <Form.Item
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignContent: 'center',
-                width: '100%',
-              }}>
-              <Button
-                type='primary'
-                htmlType='submit'
-                ghost
+              <Form.Item
                 style={{
-                  color: '#111d2c',
                   display: 'flex',
                   justifyContent: 'center',
                   alignContent: 'center',
                   width: '100%',
-                }}
-                loading={loading}>
-                Registrarse
-              </Button>
-            </Form.Item>
-          </Form>
-        </WrapperLogin>
-      </CustomCard>
-    </MainContainer>
+                }}>
+                <Button
+                  type='primary'
+                  htmlType='submit'
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    width: '100%',
+                  }}
+                  loading={loading}>
+                  Registrarse
+                </Button>
+              </Form.Item>
+            </Form>
+          </WrapperLogin>
+        </CustomCard>
+      </MainContainer>
+    </div>
   );
 };
 

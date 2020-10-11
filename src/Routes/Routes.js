@@ -5,6 +5,7 @@ import MainLogin from '../Components/login/MainLogin';
 import ProductDetail from '../Components/ShoppingProducts/ProductDetail/ProductDetail';
 import CreateProduct from '../Components/NewProduct/CreateProduct';
 import EditProduct from '../Components/EditProduct/EditProduct';
+import Signup from '../Components/login/loginComponents/signup/Signup';
 
 export const routes = [
   {
@@ -31,6 +32,11 @@ export const routes = [
     path: '/Login',
     component: MainLogin,
     name: 'Login',
+  },
+  {
+    path: '/Register',
+    component: Signup,
+    name: 'Signup',
   },
   {
     path: '/CreateProduct',

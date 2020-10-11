@@ -192,23 +192,13 @@ const EditProduct = () => {
             </ProductForm>
           </ProductFields>
           <ButtonWrapper>
-            <Form.Item>
-              <Button
-                type='primary'
-                ghost
-                style={{ color: '#111d2c' }}
-                loading={loading}
-                htmlType='submit'>
-                Actualizar
-              </Button>
-              <Button
-                type='primary'
-                ghost
-                loading={loading}
-                onClick={() => ProductDelete(id, token)}>
-                Eliminar
-              </Button>
-            </Form.Item>
+            <Button type='primary' loading={loading} htmlType='submit'>
+              Actualizar
+            </Button>
+
+            <Button type='primary' loading={loading} onClick={() => ProductDelete(id, token)}>
+              Eliminar
+            </Button>
           </ButtonWrapper>
         </Form>
       </CustomCard>
