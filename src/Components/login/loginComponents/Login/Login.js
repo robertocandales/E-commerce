@@ -123,9 +123,7 @@ const Login = ({ setShowComponent }) => {
               <Button
                 type='primary'
                 htmlType='submit'
-                ghost
                 style={{
-                  color: '#111d2c',
                   display: 'flex',
                   justifyContent: 'center',
                   alignContent: 'center',
