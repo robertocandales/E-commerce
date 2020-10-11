@@ -14,6 +14,7 @@ import {
 } from './styled';
 import { LoginAction } from '../../../../Redux/Actions/LoginAction';
 import Notification from '../../../global/Notification';
+import { useHistory } from 'react-router';
 const { Title, Text } = Typography;
 
 const layout = {
@@ -25,6 +26,7 @@ const Login = ({ setShowComponent }) => {
   const [loading, setloading] = useState(false);
   const [data, setdata] = useState('');
   const dispatch = useDispatch();
+  let history = useHistory();
 
   const onFinish = async (values) => {
     setloading(true);
@@ -38,10 +40,10 @@ const Login = ({ setShowComponent }) => {
           message: `Bienvenidos ${res.data.user.name}`,
         });
         setdata(res.data);
-        //redirect({ route: '/envios-en-curso' });
         await dispatch(LoginAction(res.data));
-        console.log(res, 'error');
+
         setloading(false);
+        redirect({ route: '/ShoppingsProducts' });
       } else {
         if (res.data.error === 'please enter all fields') {
           Notification({
@@ -67,7 +69,9 @@ const Login = ({ setShowComponent }) => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
-
+  const redirect = ({ route }) => {
+    history.push(route);
+  };
   return (
     <MainContainer>
       <CustomCard hoverable>

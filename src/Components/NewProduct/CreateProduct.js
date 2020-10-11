@@ -6,8 +6,10 @@ const { Title } = Typography;
 const CreateProduct = () => {
   return (
     <div>
-      <Title type='secondary'> Perfil </Title>
-      <NewProduct />
+      <Title type='secondary'> Producto </Title>
+      <div>
+        <NewProduct />
+      </div>
     </div>
   );
 };

@@ -13,7 +13,7 @@ import { useParams } from 'react-router';
 import { useHistory } from 'react-router';
 import { Form, Button, Typography } from 'antd';
 import Notification from '../global/Notification';
-import { newProduct } from '../../Api/ProductsApi';
+import { deleteAproduct, newProduct } from '../../Api/ProductsApi';
 const { Title } = Typography;
 
 const EditProduct = () => {
@@ -25,7 +25,9 @@ const EditProduct = () => {
   };
   const { id } = useParams();
   const { products } = useSelector((store) => store.product);
-  const { login, token } = useSelector((store) => store.login);
+  const { login } = useSelector((store) => store.login);
+  const { token } = login;
+
   const [fileList, setFileList] = useState([]);
   const [thumbUrl, setHhumbUrl] = useState('');
 
@@ -70,14 +72,14 @@ const EditProduct = () => {
       });
       setloading(false);
     } else {
-      if (res.data.error === 'No token, authorization denied') {
+      if (res.data.error === 'No token, authorization failed') {
         Notification({
           message: 'Debe iniciar sesion para poder cargar productos',
           type: 'error',
         });
         setloading(false);
       }
-      if (res.data.error === 'Token is no valid') {
+      if (res.data.error === 'Not authorized, no token') {
         Notification({
           message: 'Problemas de inicio de sesion, debe inicar sesion nuevamente',
           type: 'error',
@@ -100,6 +102,33 @@ const EditProduct = () => {
     }
 
     return e && e.fileList;
+  };
+
+  const ProductDelete = async (id, token) => {
+    setloading(true);
+    const res = await deleteAproduct(id, token);
+    if (res.data.error === 'Not authorized, token failed') {
+      Notification({
+        message: 'Debe iniciar sesion para poder eliminar productos',
+        type: 'error',
+      });
+      setloading(false);
+    }
+    if (res.data.error === 'Not authorized, no token') {
+      Notification({
+        message: 'Problemas de inicio de sesion, debe inicar sesion nuevamente',
+        type: 'error',
+      });
+      setloading(false);
+    }
+    if (!res.data.error) {
+      Notification({
+        message: 'Producto eliminado de forma existosa',
+        type: 'success',
+      });
+      setloading(false);
+      redirect({ route: '/ShoppingsProducts' });
+    }
   };
   return (
     <div className='site-card-border-less-wrapper'>
@@ -170,7 +199,14 @@ const EditProduct = () => {
                 style={{ color: '#111d2c' }}
                 loading={loading}
                 htmlType='submit'>
-                Cargar Producto{' '}
+                Actualizar
+              </Button>
+              <Button
+                type='primary'
+                ghost
+                loading={loading}
+                onClick={() => ProductDelete(id, token)}>
+                Eliminar
               </Button>
             </Form.Item>
           </ButtonWrapper>
