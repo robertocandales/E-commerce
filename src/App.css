@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.ant-btn-primary {
+  background-color: #161d40;
+  border-color: #161d40;
+}
+.ant-btn-primary:disabled {
+  color: #d2e0fa !important;
+  border-color: #d2e0fa !important;
+}
+.ant-btn-primary:hover {
+  background-color: #263ea0;
+  border-color: #263ea0;
+}
+.ant-btn-primary:focus {
+  background-color: #263ea0;
+  border-color: #263ea0;
+}

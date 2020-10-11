@@ -3,7 +3,6 @@ import ProductCard from './ProductCard/ProductCard';
 import { useDispatch } from 'react-redux';
 import { Container, Wrapper } from './styled';
 import { Typography, Skeleton } from 'antd';
-import { products } from '../../ExampleData/Product';
 import { allProducts } from '../../Api/ProductsApi';
 import { getProductAction } from '../../Redux/Actions/getProductAction';
 import Notification from '../global/Notification';
@@ -45,6 +44,7 @@ const ShoppingsProducts = () => {
                 name={product.name}
                 price={product.price}
                 description={product.description}
+                id={product._id}
               />
             </div>
           ))}

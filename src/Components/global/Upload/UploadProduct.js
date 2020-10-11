@@ -6,10 +6,23 @@ import './styles.css';
 import { URLbase } from '../../../Api/URLbase';
 import { useSelector } from 'react-redux';
 
-const UploadProduct = ({ fileList, setFileList, setHhumbUrl }) => {
+const UploadProduct = ({ fileList, setFileList, setHhumbUrl, thumbUrl, edit = false }) => {
   const { token } = useSelector((store) => store.login.login);
-  const [defaultFileList, setDefaultFileList] = useState([]);
-  const [progress, setProgress] = useState(0);
+  const [defaultFileList, setDefaultFileList] = useState(
+    edit
+      ? [
+          {
+            percent: 100,
+            size: 221700,
+            status: 'uploading',
+            thumbUrl: thumbUrl,
+            type: 'image/png',
+            uid: Math.random() + 100,
+          },
+        ]
+      : [],
+  );
+  const [progress, setProgress] = useState(edit ? 100 : 0);
 
   const uploadImage = async (options) => {
     const { onSuccess, onError, file, onProgress } = options;
@@ -63,7 +76,7 @@ const UploadProduct = ({ fileList, setFileList, setHhumbUrl }) => {
   const handleOnChange = ({ file, fileList, event }) => {
     setDefaultFileList(fileList);
     setHhumbUrl(fileList[0]);
-    console.log(fileList, 'fileList');
+    console.log(fileList);
   };
 
   return (
