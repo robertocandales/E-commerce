@@ -26,7 +26,7 @@ const WarningModal = ({ label = '', type = 'info', title = 'title', history }) =
         <>
           <Row justify='center'>
             <Col span={24} style={{ display: 'flex', justifyContent: 'center' }}>
-              <Button type='primary' onClick={() => history.push('/login')}>
+              <Button type='primary' onClick={() => history.push('/Register')}>
                 Soy nuevo
               </Button>
             </Col>

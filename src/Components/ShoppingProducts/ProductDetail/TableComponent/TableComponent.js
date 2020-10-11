@@ -24,7 +24,7 @@ const TableComponent = ({ login, history }) => {
       </Row>
       <DividerStyle />
       <Row>
-        {login.login === 'success' ? (
+        {login?.login === 'success' ? (
           <Button type='primary'>Agregar al carrito</Button>
         ) : (
           <WarningModal

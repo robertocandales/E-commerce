@@ -7,7 +7,7 @@ import { EditOutlined } from '@ant-design/icons';
 const { Text } = Typography;
 
 const { Meta } = Card;
-const ProductCard = ({ image, name, price, description, id }) => {
+const ProductCard = ({ image, name, price, description, id, login }) => {
   let history = useHistory();
   const redirect = ({ route }) => {
     history.push(route);
@@ -31,14 +31,15 @@ const ProductCard = ({ image, name, price, description, id }) => {
           </Text>{' '}
         </WrapperDescription>
       </Card>
-      <Tooltip title='Editar'>
+      {login?.user?.isAdmin && (
         <Button
-          type='link'
-          shape='circle'
-          icon={<EditOutlined />}
+          type='primary'
+          block
           onClick={() => redirect({ route: `/EditProduct/${id}` })}
-        />
-      </Tooltip>
+          icon={<EditOutlined />}>
+          Editar / Eliminar producto
+        </Button>
+      )}
     </div>
   );
 };

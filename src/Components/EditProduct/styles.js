@@ -55,7 +55,7 @@ export const ProductFields = styled.div`
 export const ButtonWrapper = styled.div`
   display: flex;
 
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   height: 100%;

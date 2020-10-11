@@ -12,12 +12,14 @@ import { Form, Button, Typography } from 'antd';
 import Notification from '../../global/Notification';
 import { newProduct } from '../../../Api/ProductsApi';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 const { Title } = Typography;
 
 const NewProduct = () => {
-  const { token } = useSelector((store) => store.login.login);
+  const { login } = useSelector((store) => store.login);
   const [fileList, setFileList] = useState([]);
   const [thumbUrl, setHhumbUrl] = useState('');
+  let history = useHistory();
 
   const [loading, setloading] = useState(false);
   const formatData = (values, fileList) => {
@@ -30,33 +32,42 @@ const NewProduct = () => {
   };
   const onFinish = async (values) => {
     setloading(true);
+
     const data = formatData(values, thumbUrl);
-    console.log(data);
-    const res = await newProduct(data, token);
-    console.log(res);
-    if (!res.data.error) {
-      Notification({
-        message: 'Producto guardado de forma existosa',
-        type: 'success',
-      });
+    if (data.image) {
+      const res = await newProduct(data, login.token);
+      console.log(res);
+      if (!res.data.error) {
+        Notification({
+          message: 'Producto guardado  existosamente',
+          type: 'success',
+        });
+        setloading(false);
+        redirect({ route: '/ShoppingsProducts' });
+      } else {
+        if (res.data.error === 'No token, authorization denied') {
+          Notification({
+            message: 'Debe iniciar sesion para poder cargar productos',
+            type: 'error',
+          });
+          setloading(false);
+        }
+        if (res.data.error === 'Token is no valid') {
+          Notification({
+            message: 'Problemas de inicio de sesion, debe inicar sesion nuevamente',
+            type: 'error',
+          });
+          setloading(false);
+        }
+      }
       setloading(false);
     } else {
-      if (res.data.error === 'No token, authorization denied') {
-        Notification({
-          message: 'Debe iniciar sesion para poder cargar productos',
-          type: 'error',
-        });
-        setloading(false);
-      }
-      if (res.data.error === 'Token is no valid') {
-        Notification({
-          message: 'Problemas de inicio de sesion, debe inicar sesion nuevamente',
-          type: 'error',
-        });
-        setloading(false);
-      }
+      Notification({
+        message: 'Agregar imagen del producto',
+        type: 'error',
+      });
+      setloading(false);
     }
-    setloading(false);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -72,11 +83,14 @@ const NewProduct = () => {
 
     return e && e.fileList;
   };
+  const redirect = ({ route }) => {
+    history.push(route);
+  };
   return (
     <div className='site-card-border-less-wrapper'>
       <CustomCard hoverable>
         <WrapperTitle>
-          <Title type='secondary'>Cargar Nuevo Producto </Title>
+          <Title type='secondary'> Nuevo Producto </Title>
         </WrapperTitle>
         <Form
           name='Product'

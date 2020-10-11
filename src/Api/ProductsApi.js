@@ -28,19 +28,18 @@ export const newProduct = async (data, token) => {
   };
   return await axios.post(`${URLbase}${createProduct}`, options.body, { headers: options.headers });
 };
-export const deleteAproduct = async (id, data) => {
+export const deleteAproduct = async (id, token) => {
   const options = {
-    body: {
-      ...data,
-    },
+    headers: { 'Content-Type': 'application/json', 'X-Auth-Token': token },
   };
-  return await axios.delete(`${URLbase}${deleteProduct}${id}`, options.body);
+  return await axios.delete(`${URLbase}${deleteProduct}${id}`, { headers: options.headers });
 };
-export const updateAproduct = async (id, data) => {
+export const updateAproduct = async (id, token) => {
   const options = {
-    body: {
-      ...data,
-    },
+    //body: {
+    //  ...data,
+    //},
+    headers: { 'Content-Type': 'application/json', 'X-Auth-Token': token },
   };
   return await axios.put(`${URLbase}${updateProduct}${id}`, options.body);
 };
