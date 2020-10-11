@@ -19,6 +19,9 @@ const LeftMenu = () => {
       <Menu.Item key='Compra'>
         <Button onClick={() => redirect({ route: '/ShoppingCart' })}>Carrito de Compra</Button>
       </Menu.Item>
+      <Menu.Item key='CreateProduct'>
+        <Button onClick={() => redirect({ route: '/create_product' })}>Publicar producto</Button>
+      </Menu.Item>
       {/*<SubMenu title={<span>Carrito de Compra</span>}>
         <MenuItemGroup title='Item 1'>
           <Menu.Item key='setting:1'>Option 1</Menu.Item>

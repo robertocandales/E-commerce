@@ -2,6 +2,9 @@ import ShoppingCart from '../Components/ShoppingCart/ShoppingCart';
 import ShoppingsProducts from '../Components/ShoppingProducts/ShoppingsProducts';
 import Profile from '../Components/Profile/Profile';
 import MainLogin from '../Components/login/MainLogin';
+import ProductDetail from '../Components/ShoppingProducts/ProductDetail/ProductDetail';
+import CreateProduct from '../Components/NewProduct/CreateProduct';
+import EditProduct from '../Components/EditProduct/EditProduct';
 
 export const routes = [
   {
@@ -15,6 +18,11 @@ export const routes = [
     name: 'ShoppingsProducts',
   },
   {
+    path: '/productDetails/:id',
+    component: ProductDetail,
+    name: 'ProductDetail',
+  },
+  {
     path: '/Profile',
     component: Profile,
     name: 'Profile',
@@ -23,5 +31,15 @@ export const routes = [
     path: '/Login',
     component: MainLogin,
     name: 'Login',
+  },
+  {
+    path: '/CreateProduct',
+    component: CreateProduct,
+    name: 'CreateProduct',
+  },
+  {
+    path: '/EditProduct/:id',
+    component: EditProduct,
+    name: 'EditProduct',
   },
 ];

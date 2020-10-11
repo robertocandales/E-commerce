@@ -26,6 +26,9 @@ const NavBar = () => {
       <Menu.Item key='ShoppingCart' icon={<ShoppingCartOutlined />}>
         Carrito de Compra{' '}
       </Menu.Item>
+      <Menu.Item key='CreateProduct' icon={<ShoppingCartOutlined />}>
+        Publicar Producto
+      </Menu.Item>
       <Menu.Item key='Profile' icon={<UserOutlined />}>
         Perfil
       </Menu.Item>
