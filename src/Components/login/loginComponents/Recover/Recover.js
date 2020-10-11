@@ -48,13 +48,7 @@ const Recover = ({ setShowComponent }) => {
             </Form.Item>
 
             <Form.Item {...tailLayout}>
-              <Button
-                type='primary'
-                ghost
-                block
-                style={{ color: '#111d2c' }}
-                loading={loading}
-                htmlType='submit'>
+              <Button type='primary' block loading={loading} htmlType='submit'>
                 Restablecer
               </Button>
             </Form.Item>
