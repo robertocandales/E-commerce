@@ -40,6 +40,7 @@ const Signup = ({ setShowComponent }) => {
         });
 
         setloading(false);
+        redirect({ route: '/login' });
         setShowComponent({ Login: true, Recover: false, Signup: false });
       } else {
         if (res.data.error === 'User already exist') {
