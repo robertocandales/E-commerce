@@ -48,7 +48,7 @@ const ProductDetail = () => {
               <Text>{productDetail.price}</Text>
             </ProductDetails>
             <>
-              <TableComponent login={login} history={history} />
+              <TableComponent login={login} history={history} productDetail={productDetail} />
             </>
           </Wrapper>
         </div>

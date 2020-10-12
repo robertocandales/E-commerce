@@ -5,12 +5,12 @@ import WarningModal from '../../../global/WarningModal/WarningModal';
 import { Wrapper, Row, DividerStyle } from './styles';
 const { Text } = Typography;
 
-const TableComponent = ({ login, history }) => {
+const TableComponent = ({ login, history, productDetail }) => {
   return (
     <Wrapper>
       <Row>
         <Text>Precio</Text>
-        <Text>123</Text>
+        <Text> {productDetail.price} </Text>
       </Row>
       <DividerStyle />
       <Row>
