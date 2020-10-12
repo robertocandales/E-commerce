@@ -4,7 +4,7 @@ import axios from 'axios';
 const getAllProduct = '/api/products';
 const getProduct = '/api/products/';
 const deleteProduct = '/api/products/';
-const updateProduct = '/updateProduct/';
+const updateProduct = '/api/products/';
 const createProduct = '/api/products';
 
 export const allProducts = async () => {
@@ -34,12 +34,14 @@ export const deleteAproduct = async (id, token) => {
   };
   return await axios.delete(`${URLbase}${deleteProduct}${id}`, { headers: options.headers });
 };
-export const updateAproduct = async (id, token) => {
+export const updateAproduct = async (id, token, data) => {
   const options = {
-    //body: {
-    //  ...data,
-    //},
+    body: {
+      ...data,
+    },
     headers: { 'Content-Type': 'application/json', 'X-Auth-Token': token },
   };
-  return await axios.put(`${URLbase}${updateProduct}${id}`, options.body);
+  return await axios.put(`${URLbase}${updateProduct}${id}`, options.body, {
+    headers: options.headers,
+  });
 };

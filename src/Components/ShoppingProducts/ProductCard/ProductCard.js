@@ -27,7 +27,7 @@ const ProductCard = ({ image, name, price, description, id, login }) => {
         <Meta title={name} description={description} />
         <WrapperDescription>
           <Text ellipsis style={{ marginTop: '5px' }}>
-            {price}
+            {price} $
           </Text>{' '}
         </WrapperDescription>
       </Card>

@@ -38,9 +38,9 @@ export const ProductDetails = styled.div`
 export const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 20px;
   ${respondTo.mobile`
  
   `};

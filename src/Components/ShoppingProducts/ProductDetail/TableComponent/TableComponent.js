@@ -6,6 +6,7 @@ import { Wrapper, Row, DividerStyle } from './styles';
 const { Text } = Typography;
 
 const TableComponent = ({ login, history, productDetail }) => {
+  console.log(login);
   return (
     <Wrapper>
       <Row>
@@ -15,16 +16,21 @@ const TableComponent = ({ login, history, productDetail }) => {
       <DividerStyle />
       <Row>
         <Text>Estatus</Text>
-        <Text>N/A</Text>
+        <Text>
+          {' '}
+          {productDetail.countInStock > 0
+            ? `${productDetail.countInStock} disponibles en stock`
+            : 'Sin disponibilidad'}{' '}
+        </Text>
       </Row>{' '}
       <DividerStyle />
       <Row>
         <Text>Qty</Text>
-        <SelectComponent />
+        <SelectComponent qty={productDetail.countInStock} />
       </Row>
       <DividerStyle />
       <Row>
-        {login?.login === 'success' ? (
+        {login?.status === 'success' ? (
           <Button type='primary'>Agregar al carrito</Button>
         ) : (
           <WarningModal
