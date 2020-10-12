@@ -28,6 +28,7 @@ const NewProduct = () => {
       description: values.description,
       price: values.price,
       image: fileList.thumbUrl,
+      countInStock: values.countInStock,
     };
   };
   const onFinish = async (values) => {
@@ -117,32 +118,40 @@ const NewProduct = () => {
                 </Form.Item>
               </Form.Item>
             </ProductForm>
-            <ProductForm direction={'row'}>
+            <ProductForm>
               <Form.Item label='Precio'>
                 <Form.Item
                   name='price'
                   rules={[{ required: true, message: 'Campo requerido' }]}
                   noStyle>
-                  <CustomInput width={'150px'} placeholder='Precio del Producto' />
+                  <CustomInput type='number' placeholder='Precio del Producto' />
                 </Form.Item>
               </Form.Item>{' '}
-              <Form.Item label='Imagen'>
+              <Form.Item label='Cantidad en stock'>
                 <Form.Item
-                  name='image'
-                  valuePropName='fileList'
-                  getValueFromEvent={normFile}
-                  extra=''
-                  style={{ display: 'flex' }}>
-                  <UploadProduct
-                    fileList={fileList}
-                    setFileList={setFileList}
-                    action='/upload.do'
-                    listType='picture'
-                    setHhumbUrl={setHhumbUrl}
-                  />
+                  name='countInStock'
+                  rules={[{ required: true, message: 'Campo requerido' }]}
+                  noStyle>
+                  <CustomInput type='number' placeholder='Cantidad disponible' />
                 </Form.Item>
-              </Form.Item>
+              </Form.Item>{' '}
             </ProductForm>
+            <Form.Item label='Imagen'>
+              <Form.Item
+                name='image'
+                valuePropName='fileList'
+                getValueFromEvent={normFile}
+                extra=''
+                style={{ display: 'flex' }}>
+                <UploadProduct
+                  fileList={fileList}
+                  setFileList={setFileList}
+                  action='/upload.do'
+                  listType='picture'
+                  setHhumbUrl={setHhumbUrl}
+                />
+              </Form.Item>
+            </Form.Item>
           </ProductFields>
           <ButtonWrapper>
             <Form.Item>

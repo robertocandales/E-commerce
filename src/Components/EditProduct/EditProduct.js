@@ -13,7 +13,7 @@ import { useParams } from 'react-router';
 import { useHistory } from 'react-router';
 import { Form, Button, Typography } from 'antd';
 import Notification from '../global/Notification';
-import { deleteAproduct, newProduct } from '../../Api/ProductsApi';
+import { deleteAproduct, updateAproduct } from '../../Api/ProductsApi';
 const { Title } = Typography;
 
 const EditProduct = () => {
@@ -34,7 +34,6 @@ const EditProduct = () => {
   const [loading, setloading] = useState(false);
 
   const [editProduct, setEditProduct] = useState('');
-  console.log(editProduct);
 
   useEffect(() => {
     const product = products.find((product) => product._id === id);
@@ -47,6 +46,7 @@ const EditProduct = () => {
       description: product.description,
       price: product.price,
       image: product.image,
+      countInStock: product.countInStock || 0,
     });
     setloading(false);
   }, [products, id, form]);
@@ -56,21 +56,23 @@ const EditProduct = () => {
       name: values.name,
       description: values.description,
       price: values.price,
-      image: fileList.thumbUrl,
+      image: fileList,
+      countInStock: values.countInStock || 0,
     };
   };
   const onFinish = async (values) => {
     setloading(true);
-    const data = formatData(values, thumbUrl);
+    const data = formatData(values, fileList);
     console.log(data);
-    const res = await newProduct(data, token);
+    const res = await updateAproduct(id, token, data);
     console.log(res);
     if (!res.data.error) {
       Notification({
-        message: 'Producto guardado de forma existosa',
+        message: 'Producto actualizado de forma existosa',
         type: 'success',
       });
       setloading(false);
+      redirect({ route: '/ShoppingsProducts' });
     } else {
       if (res.data.error === 'No token, authorization failed') {
         Notification({
@@ -134,7 +136,7 @@ const EditProduct = () => {
     <div className='site-card-border-less-wrapper'>
       <CustomCard hoverable>
         <WrapperTitle>
-          <Title type='secondary'>Cargar Nuevo Producto </Title>
+          <Title type='secondary'>Editar Producto </Title>
         </WrapperTitle>
         <Form
           form={form}
@@ -162,34 +164,42 @@ const EditProduct = () => {
                 </Form.Item>
               </Form.Item>
             </ProductForm>
-            <ProductForm direction={'row'}>
+            <ProductForm>
               <Form.Item label='Precio'>
                 <Form.Item
                   name='price'
                   rules={[{ required: true, message: 'Campo requerido' }]}
                   noStyle>
-                  <CustomInput width={'150px'} placeholder='Precio del Producto' />
-                </Form.Item>
-              </Form.Item>{' '}
-              <Form.Item label='Imagen'>
-                <Form.Item
-                  name='image'
-                  valuePropName='fileList'
-                  getValueFromEvent={normFile}
-                  extra=''
-                  style={{ display: 'flex' }}>
-                  <UploadProduct
-                    fileList={fileList}
-                    setFileList={setFileList}
-                    action='/upload.do'
-                    listType='picture'
-                    setHhumbUrl={setHhumbUrl}
-                    thumbUrl={thumbUrl}
-                    edit={true}
-                  />
+                  <CustomInput type='number' placeholder='Precio del Producto' />
                 </Form.Item>
               </Form.Item>
+              <Form.Item label='Cantidad en stock'>
+                <Form.Item
+                  name='countInStock'
+                  rules={[{ required: true, message: 'Campo requerido' }]}
+                  noStyle>
+                  <CustomInput type='number' placeholder='Cantidad disponible' />
+                </Form.Item>
+              </Form.Item>{' '}
             </ProductForm>
+            <Form.Item label='Imagen'>
+              <Form.Item
+                name='image'
+                valuePropName='fileList'
+                getValueFromEvent={normFile}
+                extra=''
+                style={{ display: 'flex' }}>
+                <UploadProduct
+                  fileList={fileList}
+                  setFileList={setFileList}
+                  action='/upload.do'
+                  listType='picture'
+                  setHhumbUrl={setHhumbUrl}
+                  thumbUrl={thumbUrl}
+                  edit={true}
+                />
+              </Form.Item>
+            </Form.Item>
           </ProductFields>
           <ButtonWrapper>
             <Button type='primary' loading={loading} htmlType='submit'>
@@ -202,6 +212,11 @@ const EditProduct = () => {
           </ButtonWrapper>
         </Form>
       </CustomCard>
+      <div style={{ display: 'flex', width: '100%', justifyContent: 'center', marginTop: '20px' }}>
+        <Button onClick={() => redirect({ route: `/ShoppingsProducts` })} type='primary'>
+          Regresar a todos los productos
+        </Button>
+      </div>
     </div>
   );
 };

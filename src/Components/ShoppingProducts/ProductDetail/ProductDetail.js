@@ -31,11 +31,6 @@ const ProductDetail = () => {
         <Skeleton active />
       ) : (
         <div>
-          <ButtonWrapper>
-            <Button onClick={() => redirect({ route: `/ShoppingsProducts` })} type='primary'>
-              Todos los productos
-            </Button>
-          </ButtonWrapper>
           <Wrapper>
             <>
               <Img src={productDetail?.image} alt={productDetail?.name} />
@@ -51,6 +46,11 @@ const ProductDetail = () => {
               <TableComponent login={login} history={history} productDetail={productDetail} />
             </>
           </Wrapper>
+          <ButtonWrapper>
+            <Button onClick={() => redirect({ route: `/ShoppingsProducts` })} type='primary'>
+              Regresar a todos los productos{' '}
+            </Button>
+          </ButtonWrapper>
         </div>
       )}
     </>
