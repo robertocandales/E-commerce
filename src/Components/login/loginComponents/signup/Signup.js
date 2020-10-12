@@ -61,6 +61,12 @@ const Signup = ({ setShowComponent }) => {
       }
     } catch (error) {
       console.log(error);
+      const err = error.response.data;
+      Notification({
+        type: 'error',
+        message: { err },
+      });
+      setloading(false);
     }
   };
 

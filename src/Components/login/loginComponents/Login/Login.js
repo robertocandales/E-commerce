@@ -33,7 +33,7 @@ const Login = ({ setShowComponent }) => {
 
     try {
       const res = await authLogin(values);
-      console.log(res, 'res');
+
       if (!res.data.error) {
         Notification({
           type: 'success',
@@ -45,16 +45,10 @@ const Login = ({ setShowComponent }) => {
         setloading(false);
         redirect({ route: '/ShoppingsProducts' });
       } else {
-        if (res.data.error === 'please enter all fields') {
+        if (res.data.error === 'user not found') {
           Notification({
             type: 'error',
-            message: 'Por favor ingrese todos los campos.',
-          });
-          setloading(false);
-        } else {
-          Notification({
-            type: 'error',
-            message: 'El usuario no existe, por favor, Registrarse',
+            message: 'El usuario no existe, por favor, Registrarse.',
           });
           setloading(false);
         }
@@ -63,6 +57,13 @@ const Login = ({ setShowComponent }) => {
       }
     } catch (error) {
       console.log(error);
+      if (error.response.status === 401)
+        Notification({
+          type: 'error',
+          message: 'Usuario o contraseña invalida',
+        });
+
+      setloading(false);
     }
   };
 
